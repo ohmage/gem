@@ -1,0 +1,10 @@
+/.bundle/
+Gemfile.lock
+/spec/reports/
+/tmp/
+*.bundle
+*.so
+*.o
+*.a
+*.gem
+.DS_Store
