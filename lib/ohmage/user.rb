@@ -33,7 +33,7 @@ module Ohmage
       def user_create(params = {})
         request = Ohmage::Request.new(self, :post, 'user/create', params)
         resp = request.perform
-        return [params['username'], params['password']]
+        return user_read('username' => params['username'])
       end
 
       #
