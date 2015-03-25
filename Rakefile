@@ -1,17 +1,9 @@
-require 'bundler/gem_tasks'
+require 'bundler'
 require 'rubocop/rake_task'
+Bundler::GemHelper.install_tasks
 
-# Style tests. Rubocop
-namespace :style do
-  desc 'Run Ruby style checks'
-  RuboCop::RakeTask.new(:ruby)
-end
-
-desc 'Run all style checks'
-task style: ['style:ruby']
-
-desc 'Run all tests on Travis'
-task travis: %w(style)
+require 'rubocop/rake_task'
+RuboCop::RakeTask.new
 
 # Default
-task default: %w(style)
+task default: [:rubocop]
