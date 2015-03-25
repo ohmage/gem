@@ -2,30 +2,22 @@ require 'ohmage/api'
 require 'ohmage/request'
 
 module Ohmage
-  class Client 
+  class Client
     include Ohmage::API
-    attr_accessor :host
-    attr_accessor :port
-    attr_accessor :path
-    attr_accessor :client_string
-    attr_accessor :user
-    attr_accessor :password
-    attr_accessor :token
-    attr_accessor :server_config
-    def initialize(options={})
-      # Normalize key to String to allow indifferent access.
-      options = options.inject({}) do |accu, (key, value)|
-        accu[key.to_sym] = value
-        accu
+    attr_accessor :host, :port, :path, :client_string, :user, :password, :token, :server_config
+    def initialize(options = {}) # rubocop:disable MethodLength
+      self.server_url = ENV['OHMAGE_SERVER_URL']
+      self.user = ENV['OHMAGE_USER']
+      self.password = ENV['OHMAGE_PASSWORD']
+      self.client_string = 'ruby-ohmage'
+      self.path = 'app/'
+      self.port = 443
+      options.each do |k, v|
+        instance_variable_set("@#{k}", v)
       end
-      self.host = options[:host] || 'https://test.mobilizingcs.org'
-      self.port = options[:port] || 443
-      self.path = options[:path] || '/app/'
-      self.user = options[:user] || 'mobilize-teacher'
-      self.password = options[:password] || Object::ENV['ohmage_password']
-      self.client_string = options[:client_string] || 'ruby-ohmage'
+      yield(self) if block_given?
       server_config_read
-      return self
+      self
     end
     #
     # ohmage config/read call
@@ -42,12 +34,12 @@ module Ohmage
     #
     def auth_token
       params = {}
-      params['user'] = self.user
-      params['password'] = self.password
+      params['user'] = user
+      params['password'] = password
       request = Ohmage::Request.new(self, :post, 'user/auth_token', params)
       resp = request.perform
       self.token = resp[:token]
-      return resp[:token]
+      resp[:token]
     end
     alias_method :auth, :auth_token
   end

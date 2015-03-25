@@ -4,9 +4,9 @@ require 'ohmage/version'
 
 Gem::Specification.new do |spec|
   spec.add_dependency 'addressable'
-  spec.add_dependency 'http'
-  spec.add_dependency 'thor'
-  spec.add_dependency 'formatador'
+  spec.add_dependency 'http', '~> 0.7.3'
+  spec.add_dependency 'thor', '~> 0.19.1'
+  spec.add_dependency 'formatador', '~> 0.2.5'
   spec.authors = ['Steve Nolen']
   spec.description = 'A Ruby interface for the ohmage 2.x API.'
   spec.email = %w(technolengy@gmail.com)

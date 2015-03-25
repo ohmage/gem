@@ -10,7 +10,7 @@ module Ohmage
         # TODO: make a utility to abstract creation of array of base objects
         t = []
         request.perform[:data].each do |k, v|
-          t << Ohmage::Campaign.new({k => v})
+          t << Ohmage::Campaign.new(k => v)
         end
         t
       end

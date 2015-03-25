@@ -1,24 +1,22 @@
 module Ohmage
   class Request
-    def initialize(client, request_method, api, options = {})
+    def initialize(client, request_method, api, options = {}) # rubocop:disable MethodLength
       @client = client
-      @uri = Addressable::URI.parse(@client.host + @client.path + api)
+      @uri = Addressable::URI.parse(@client.server_url + @client.path + api)
       @options = options
       @options['client'] = @client.client_string
       case api
       when 'config/read', 'user/auth_token', 'user/auth'
         # these calls don't need auth
       else
-        if @client.token.nil?
-          @client.auth
-        end
+        @client.auth if @client.token.nil?
         @options['auth_token'] = @client.token
       end
 
       @request_method = request_method
     end
-    def perform
-      response = HTTP.public_send(@request_method, @uri.to_s, :params => @options)
+    def perform # rubocop:disable all
+      response = HTTP.public_send(@request_method, @uri.to_s, params: @options)
       response_body = symbolize_keys!(response.parse)
       response_headers = response.headers
       begin
@@ -28,12 +26,13 @@ module Ohmage
         # refactor this, essentially recursively performs the request if it token failed
         # on the first try. bad, bad, bad.
         @options['auth_token'] = @client.token
-        response = HTTP.public_send(@request_method, @uri.to_s, :params => @options)
+        response = HTTP.public_send(@request_method, @uri.to_s, params: @options)
         response_body = symbolize_keys!(response.parse)
         response_headers = response.headers
         fail_or_return_response_body(response.status, response_body, response_headers)
       end
     end
+
     def symbolize_keys!(object)
       if object.is_a?(Array)
         object.each_with_index do |val, index|
@@ -46,12 +45,14 @@ module Ohmage
       end
       object
     end
+
     def fail_or_return_response_body(code, body, headers)
       error = error(code, body, headers)
       fail(error) if error
       body
     end
-    def error(code, body, headers)
+
+    def error(code, body, _headers) # rubocop:disable all
       # ohmage doesn't really return HTTP error codes
       # so we're going to catch the real ones first, assuming
       # they are sent from the web server (like 502 or 404)
@@ -65,14 +66,14 @@ module Ohmage
           # persistent tokens
           @code = body[:errors].first[:code]
           @message = body[:errors].first[:text]
-          if @message =~ /token/
-            @code = '0203' #a new fake error code for catching token errors
+          if @message =~ /token/ # rubocop:disable Metrics/BlockNesting
+            @code = '0203' # a new fake error code for catching token errors
           end
           klass = Ohmage::Error::STRING_ERRORS[@code]
           klass.from_response(body) # refactor this.
         end # body has { "result": "success" }, so let's assume it isn't a failure.
       else
-        # return the base error 
+        # return the base error
         klass.from_response(body)
       end
     end

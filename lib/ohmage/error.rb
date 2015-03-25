@@ -1,6 +1,5 @@
 module Ohmage
   class Error < StandardError
-
     ClientError = Class.new(self)
     BadRequest = Class.new(ClientError)
     Unauthorized = Class.new(ClientError)
@@ -8,6 +7,12 @@ module Ohmage
     NotAcceptable = Class.new(ClientError)
     InvalidToken = Class.new(ClientError)
     InvalidParameter = Class.new(ClientError)
+    MobilityException = Class.new(ClientError)
+    SurveyException = Class.new(ClientError)
+    CampaignException = Class.new(ClientError)
+    ImageException = Class.new(ClientError)
+    ClassException = Class.new(ClientError)
+    UserException = Class.new(ClientError)
     CatchAll = Class.new(ClientError)
 
     ServerError = Class.new(self)
@@ -26,8 +31,9 @@ module Ohmage
       500 => Ohmage::Error::InternalServerError,
       502 => Ohmage::Error::BadGateway,
       503 => Ohmage::Error::ServiceUnavailable,
-      504 => Ohmage::Error::GatewayTimeout
+      504 => Ohmage::Error::GatewayTimeout,
     }
+    # How ugly is this??
     STRING_ERRORS = {
       '0100' => Ohmage::Error::InternalServerError,
       '0101' => Ohmage::Error::InternalServerError,
@@ -35,12 +41,30 @@ module Ohmage
       '0200' => Ohmage::Error::Unauthorized,
       '0201' => Ohmage::Error::Unauthorized,
       '0202' => Ohmage::Error::Unauthorized,
-      '0203' => Ohmage::Error::InvalidToken
+      '0203' => Ohmage::Error::InvalidToken,
     }
     ('0300'..'0312').to_a.each do |e|
       STRING_ERRORS[e] = Ohmage::Error::InvalidParameter
     end
-    ('0500'..'1803').to_a.each do |e|
+    ('0500'..'0503').to_a.each do |e|
+      STRING_ERRORS[e] = Ohmage::Error::MobilityException
+    end
+    ('0600'..'0630').to_a.each do |e|
+      STRING_ERRORS[e] = Ohmage::Error::SurveyException
+    end
+    ('0700'..'0713').to_a.each do |e|
+      STRING_ERRORS[e] = Ohmage::Error::CampaignException
+    end
+    ('0800'..'0803').to_a.each do |e|
+      STRING_ERRORS[e] = Ohmage::Error::ImageException
+    end
+    ('0900'..'0906').to_a.each do |e|
+      STRING_ERRORS[e] = Ohmage::Error::ClassException
+    end
+    ('1000'..'1017').to_a.each do |e|
+      STRING_ERRORS[e] = Ohmage::Error::UserException
+    end
+    ('1100'..'1803').to_a.each do |e|
       STRING_ERRORS[e] = Ohmage::Error::CatchAll
     end
     class << self

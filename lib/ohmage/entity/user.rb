@@ -10,14 +10,13 @@ module Ohmage
     attr_reader :permissions, :classes, :campaigns
     # @return [TrueClass, FalseClass]
     attr_reader :enabled, :can_setup_users, :new_account, :can_create_classes, :can_create_campaigns, :admin, :is_admin
-    #alias_method :admin, :is_admin
 
     def initialize(attrs = {})
       @username = attrs.keys[0].to_s
-      attrs.values[0].each do |k,v|
+      attrs.values[0].each do |k, v|
         instance_variable_set("@#{k}", v)
       end
-      @permissions.each {|k, v| instance_variable_set("@#{k}", v) }
+      @permissions.each { |k, v| instance_variable_set("@#{k}", v) }
     end
   end
 end

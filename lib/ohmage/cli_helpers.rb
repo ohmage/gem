@@ -1,8 +1,8 @@
 require 'formatador'
 
 module Ohmage
-  module CLI_Helpers
-    def self.format_output(d, table, fields, no_table_field)
+  module CliHelpers
+    def self.format_output(d, table, fields, no_table_field) # rubocop:disable MethodLength
       # accepts an ohmage entity array and returns output (table or newline given table boolean)
       output = []
       d.each do |i|

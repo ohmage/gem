@@ -11,7 +11,7 @@ module Ohmage
 
     def initialize(attrs = {})
       @urn = attrs.keys[0].to_s
-      attrs.values[0].each do |k,v|
+      attrs.values[0].each do |k, v|
         instance_variable_set("@#{k}", v)
       end
     end
