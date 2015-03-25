@@ -84,5 +84,5 @@ ohmage update user testuser --no-admin --new # sets admin to false and new_accou
 Copyright (c) 2015 Steve Nolen
 See [LICENSE][] for details.
 
-[license]: LICENSE.md
+[license]: LICENSE.txt
 
