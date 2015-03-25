@@ -1,6 +1,8 @@
 ohmage gem
 ====
 
+[![Build Status](https://travis-ci.org/ohmage/gem.svg)](https://travis-ci.org/ohmage/gem)
+
 Description
 -----------
 The ohmage ruby gem is a lightweight API wrapper interacting with an ohmage 2.x server.  While this gem is still in early development, it can be found to be extremely helpful for scripting everyday tasks (and does it's best to stay out of the way, allowing the ohmage server to dictate failed interactions).  While the inclusion in a ruby script is a great way to do lots of tasks, this gem also comes with a stripped down CLI for use.
