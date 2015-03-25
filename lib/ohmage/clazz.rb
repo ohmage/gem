@@ -26,6 +26,11 @@ module Ohmage
         request = Ohmage::Request.new(self, :post, 'class/delete', params)
         request.perform
       end
+      def class_update(params = {})
+        request = Ohmage::Request.new(self, :post, 'class/update', params)
+        request.perform
+        class_read(class_urn_list: params[:class_urn])
+      end     
     end
   end
 end
