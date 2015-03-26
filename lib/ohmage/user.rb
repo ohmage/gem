@@ -54,6 +54,11 @@ module Ohmage
         request = Ohmage::Request.new(self, :post, 'user/change_password', params)
         request.perform
       end
+
+      def user_delete(params = {})
+        request = Ohmage::Request.new(self, :post, 'user/delete', params)
+        request.perform
+      end
     end
   end
 end

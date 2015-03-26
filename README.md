@@ -52,6 +52,7 @@ A list of the APIs which are currently implemented, and their internal method na
 | user_password      | user/change_password |
 | user_read          | user/read            |
 | user_info_read     | user_info/read       |
+| user_delete        | user/delete          |
 | class_read         | class/read           |
 | class_create       | class/create         |
 | class_delete       | class/delete         |

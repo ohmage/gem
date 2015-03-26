@@ -62,6 +62,11 @@ module Ohmage
       def clazz(urn)
         Ohmage.class_delete(class_urn: urn)
       end
+
+      desc 'delete user <username>', 'deletes an existing ohmage user'
+      def user(username)
+        Ohmage.user_delete(user_list: username)
+      end
     end
 
     class Update < Thor
