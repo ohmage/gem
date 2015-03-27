@@ -16,7 +16,7 @@ module Ohmage
       end
 
       def campaign_delete(params = {})
-        request = Ohmage::Request.new(self, :post, 'campaign/delete, params')
+        request = Ohmage::Request.new(self, :post, 'campaign/delete', params)
         request.perform
       end
     end
