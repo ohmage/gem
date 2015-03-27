@@ -57,6 +57,7 @@ A list of the APIs which are currently implemented, and their internal method na
 | class_create       | class/create         |
 | class_delete       | class/delete         |
 | campaign_read      | campaign/read        |
+| campaign_delete    | campaign/delete      |
 | server_config_read | config/read          |
 | auth_token, auth   | user/auth_token      |
 

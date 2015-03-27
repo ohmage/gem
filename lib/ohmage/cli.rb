@@ -13,20 +13,20 @@ module Ohmage
       option :search, aliases: :s, desc: 'a search string to limit the returned campaign list'
       def campaign
         ls = Ohmage.campaign_read(campaign_name_search: options[:search], output_format: 'short')
-        Ohmage::CLI_Helpers.format_output(ls, options[:table], [:name, :urn, :description], :urn)
+        Ohmage::CliHelpers.format_output(ls, options[:table], [:name, :urn, :description], :urn)
       end
 
       desc 'ls class <options>', 'Lists classes current user has access to'
       def clazz(urn_list = nil)
         ls = Ohmage.class_read(class_urn_list: urn_list)
-        Ohmage::CLI_Helpers.format_output(ls, options[:table], [:name, :urn, :description, :role, :users], :urn)
+        Ohmage::CliHelpers.format_output(ls, options[:table], [:name, :urn, :description, :role, :users], :urn)
       end
 
       desc 'ls user <options>', 'Lists users that match criteria of search, all viewable if no search'
       option :search, aliases: :s, desc: 'a search string to limit the returned user list'
       def user(username = nil)
         ls = Ohmage.user_read(user_list: username, username_search: options[:search])
-        Ohmage::CLI_Helpers.format_output(ls, options[:table], [:username, :email_address, :enabled, :admin, :new_account], :username)
+        Ohmage::CliHelpers.format_output(ls, options[:table], [:username, :email_address, :enabled, :admin, :new_account], :username)
       end
     end
 
@@ -44,7 +44,7 @@ module Ohmage
                                       admin: options[:admin],
                                       enabled: options[:enabled],
                                       new_account: options[:new])
-        Ohmage::CLI_Helpers.format_output(new_user, options[:table], [:username], :username)
+        Ohmage::CliHelpers.format_output(new_user, options[:table], [:username], :username)
       end
 
       desc 'create class <class_urn> <class_name> <options>', 'creates a new ohmage class with parameters'
@@ -53,7 +53,7 @@ module Ohmage
         new_class = Ohmage.class_create(class_urn: urn,
                                         class_name: name,
                                         description: options[:description])
-        Ohmage::CLI_Helpers.format_output(new_class, options[:table], [:urn, :name, :description], :urn)
+        Ohmage::CliHelpers.format_output(new_class, options[:table], [:urn, :name, :description], :urn)
       end
     end
 
@@ -66,6 +66,11 @@ module Ohmage
       desc 'delete user <username>', 'deletes an existing ohmage user'
       def user(username)
         Ohmage.user_delete(user_list: username)
+      end
+
+      desc 'delete campaign <campaign_urn>', 'deletes an existing ohmage campaign'
+      def campaign(urn)
+        Ohmage.campaign_delete(campaign_urn: urn)
       end
     end
 
@@ -80,7 +85,7 @@ module Ohmage
                                           admin: options[:admin],
                                           enabled: options[:enabled],
                                           new_account: options[:new])
-        Ohmage::CLI_Helpers.format_output(updated_user, options[:table], [:username, :admin, :enabled, :new_account], :username)
+        Ohmage::CliHelpers.format_output(updated_user, options[:table], [:username, :admin, :enabled, :new_account], :username)
       end
 
       desc 'update password <username> <options>', "updates provided user's password"
