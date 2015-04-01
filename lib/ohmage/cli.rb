@@ -26,7 +26,7 @@ module Ohmage
       option :search, aliases: :s, desc: 'a search string to limit the returned user list'
       def user(username = nil)
         ls = Ohmage.user_read(user_list: username, username_search: options[:search])
-        Ohmage::CliHelpers.format_output(ls, options[:table], [:username, :email_address, :enabled, :admin, :new_account], :username)
+        Ohmage::CliHelpers.format_output(ls, options[:table], [:username, :first_name, :last_name, :email_address, :enabled, :admin, :new_account], :username)
       end
     end
 
