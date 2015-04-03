@@ -79,11 +79,13 @@ module Ohmage
 
       desc 'update user <username> <options>', 'updates provided values for a given username'
       option :admin, type: :boolean, desc: 'is user admin?'
+      option :usersetup, type: :boolean, desc: 'user_setup privilege?'
       option :new, type: :boolean, desc: 'force pw reset on login?'
       def user(username)
         updated_user = Ohmage.user_update(username: username,
                                           admin: options[:admin],
                                           enabled: options[:enabled],
+                                          user_setup_privilege: options[:user_setup],
                                           new_account: options[:new])
         Ohmage::CliHelpers.format_output(updated_user, options[:table], [:username, :admin, :enabled, :new_account], :username)
       end
