@@ -14,6 +14,14 @@ module Ohmage
         end
         t
       end
+      def document_create(file, params = {})
+        params[:document] = HTTP::FormData::File.new(file)
+        # catch lack of document_name param, since we can just append the filename we have!
+        params[:document_name] = File.basename(file) if !params.has_key?(:document_name)
+        request = Ohmage::Request.new(self, :post, 'document/create', params)
+        request.perform
+        document_read(document_name_search: params[:document_name])
+      end
     end
   end
 end

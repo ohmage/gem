@@ -14,9 +14,16 @@ module Ohmage
       end
 
       @request_method = request_method
+      # some create/upload apis require content to be sent as multipart form. catch that here
+      case api
+      when 'document/create', 'survey/upload'
+        @params = { form: @options }
+      else
+        @params = { params: @options }
+      end
     end
     def perform # rubocop:disable all
-      response = HTTP.public_send(@request_method, @uri.to_s, params: @options)
+      response = HTTP.public_send(@request_method, @uri.to_s, @params)
       response_body = symbolize_keys!(response.parse)
       response_headers = response.headers
       begin

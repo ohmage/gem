@@ -41,6 +41,12 @@ From there you can just start making calls! Take a look at the (ohmage 2.x API s
 oh.user_create(username: 'newuser', password: 'newpassword', admin: false, enabled: true, new_account: true)
 ```
 
+A few APIs can/must use files on the disk for uploading (`document/create`, `survey/upload` if sending multimedia). You can pass the full file path of the file as the initial param of the method, like so:
+
+```ruby
+oh.document_create('/path/to/file/sample.docx', privacy_state: 'shared', document_class_role_list: 'urn:class:public;reader')
+```
+
 About object types! Calls that are able to return entities will return new instances of top-level objects: `Ohmage::User`, `Ohmage::Campaign`, `Ohmage::Clazz` (note the zz) and `Ohmage::Document`. Calls involving deletes (`user_delete`, `campaign_delete`) and `user_password` return `nil` if successful.
 
 A list of the APIs which are currently implemented, and their internal method name:
@@ -61,6 +67,7 @@ A list of the APIs which are currently implemented, and their internal method na
 | server_config_read | config/read          |
 | auth_token, auth   | user/auth_token      |
 | document_read      | document/read        |
+| document_create    | document/create      |
 
 
 CLI Documentation
