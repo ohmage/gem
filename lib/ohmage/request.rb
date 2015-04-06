@@ -17,9 +17,9 @@ module Ohmage
       # some create/upload apis require content to be sent as multipart form. catch that here
       case api
       when 'document/create', 'survey/upload'
-        @params = { form: @options }
+        @params = {form: @options}
       else
-        @params = { params: @options }
+        @params = {params: @options}
       end
     end
     def perform # rubocop:disable all
