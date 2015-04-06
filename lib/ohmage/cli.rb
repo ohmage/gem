@@ -21,7 +21,7 @@ module Ohmage
         ls = Ohmage.class_read(class_urn_list: urn_list)
         Ohmage::CliHelpers.format_output(ls, options[:table], [:name, :urn, :description, :role, :users], :urn)
       end
-      map :class => :clazz
+      map class: :clazz
 
       desc 'ls user <options>', 'Lists users that match criteria of search, all viewable if no search'
       option :search, aliases: :s, desc: 'a search string to limit the returned user list'
@@ -56,7 +56,7 @@ module Ohmage
                                         description: options[:description])
         Ohmage::CliHelpers.format_output(new_class, options[:table], [:urn, :name, :description], :urn)
       end
-      map :class => :clazz
+      map class: :clazz
     end
 
     class Delete < Thor
@@ -64,7 +64,7 @@ module Ohmage
       def clazz(urn)
         Ohmage.class_delete(class_urn: urn)
       end
-      map :class => :clazz
+      map class: :clazz
 
       desc 'delete user <username>', 'deletes an existing ohmage user'
       def user(username)
