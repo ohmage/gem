@@ -27,7 +27,7 @@ module Ohmage
       option :search, aliases: :s, desc: 'a search string to limit the returned user list'
       def user(username = nil)
         ls = Ohmage.user_read(user_list: username, username_search: options[:search])
-        Ohmage::CliHelpers.format_output(ls, options[:table], [:username, :email_address, :enabled, :admin, :new_account], :username)
+        Ohmage::CliHelpers.format_output(ls, options[:table], [:username, :first_name, :last_name, :email_address, :enabled, :admin, :new_account], :username)
       end
     end
 
@@ -82,11 +82,13 @@ module Ohmage
 
       desc 'update user <username> <options>', 'updates provided values for a given username'
       option :admin, type: :boolean, desc: 'is user admin?'
+      option :usersetup, type: :boolean, desc: 'user_setup privilege?'
       option :new, type: :boolean, desc: 'force pw reset on login?'
       def user(username)
         updated_user = Ohmage.user_update(username: username,
                                           admin: options[:admin],
                                           enabled: options[:enabled],
+                                          user_setup_privilege: options[:user_setup],
                                           new_account: options[:new])
         Ohmage::CliHelpers.format_output(updated_user, options[:table], [:username, :admin, :enabled, :new_account], :username)
       end
