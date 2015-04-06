@@ -78,8 +78,8 @@ Now you can make api calls via some really nice shorthands. the basic layout of 
 A few examples:
 
 ```bash
-ohmage ls clazz # returns list of class urns the current user can view
-ohmage ls clazz -t # returns a table of classes and info the current user can view
+ohmage ls class # returns list of class urns the current user can view
+ohmage ls class -t # returns a table of classes and info the current user can view
 ohmage create user testuser --password "testpassword" # creates a new user with defaults (enabled, new_account set, not admin)
 ohmage update user testuser --no-admin --new # sets admin to false and new_account to true for testuser
 ```
