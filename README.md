@@ -41,7 +41,7 @@ From there you can just start making calls! Take a look at the (ohmage 2.x API s
 oh.user_create(username: 'newuser', password: 'newpassword', admin: false, enabled: true, new_account: true)
 ```
 
-About object types! Calls that are able to return entities will return new instances of top-level objects: `Ohmage::User`, `Ohmage::Campaign` and `Ohmage::Clazz` (note the zz). Calls involving deletes (`user_delete`, `campaign_delete`) and `user_password` return `nil` if successful.
+About object types! Calls that are able to return entities will return new instances of top-level objects: `Ohmage::User`, `Ohmage::Campaign`, `Ohmage::Clazz` (note the zz) and `Ohmage::Document`. Calls involving deletes (`user_delete`, `campaign_delete`) and `user_password` return `nil` if successful.
 
 A list of the APIs which are currently implemented, and their internal method name:
 
@@ -60,6 +60,7 @@ A list of the APIs which are currently implemented, and their internal method na
 | campaign_delete    | campaign/delete      |
 | server_config_read | config/read          |
 | auth_token, auth   | user/auth_token      |
+| document_read      | document/read        |
 
 
 CLI Documentation
