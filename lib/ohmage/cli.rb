@@ -36,7 +36,7 @@ module Ohmage
       option :class, desc: 'limit results to only documents attached to given urn list'
       option :description, aliases: :d, desc: 'limit results to those with this string in description'
       option :personal, type: :boolean, desc: 'will return only documents explicitly related to user if true'
-      def document()
+      def document
         ls = Ohmage.document_read(document_name_search: options[:search],
                                   document_description_search: options[:description],
                                   campaign_urn_list: options[:campaign],
@@ -79,7 +79,7 @@ module Ohmage
       option :share, type: :boolean, default: false, desc: 'is document private or shared?'
       option :class_role, type: :string, desc: 'class_role param: like urn:class:public;reader'
       option :campaign_role, type: :string, desc: 'campaign_role param: like urn:campaign:snack;reader'
-      def document(file)
+      def document(file) # rubocop:disable all
         case options[:share]
         when false
           privacy_state = 'private'
@@ -101,10 +101,9 @@ module Ohmage
                                                 privacy_state: privacy_state,
                                                 description: options[:description],
                                                 document_name: options[:name])
-        end          
-          Ohmage::CliHelpers.format_output(new_document, options[:table], [:urn, :name, :description, :privacy_state], :name)
+        end
+        Ohmage::CliHelpers.format_output(new_document, options[:table], [:urn, :name, :description, :privacy_state], :name)
       end
-
     end
 
     class Delete < Thor
