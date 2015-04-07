@@ -29,6 +29,21 @@ module Ohmage
         ls = Ohmage.user_read(user_list: username, username_search: options[:search])
         Ohmage::CliHelpers.format_output(ls, options[:table], [:username, :first_name, :last_name, :email_address, :enabled, :admin, :new_account], :username)
       end
+
+      desc 'ls document <options>', 'Lists documents that match criteria and parameters'
+      option :search, aliases: :s, desc: 'a search string to limit the returned user list'
+      option :campaign, desc: 'limit results to only documents attached to given urn list'
+      option :class, desc: 'limit results to only documents attached to given urn list'
+      option :description, aliases: :d, desc: 'limit results to those with this string in description'
+      option :personal, type: :boolean, desc: 'will return only documents explicitly related to user if true'
+      def document()
+        ls = Ohmage.document_read(document_name_search: options[:search],
+                                  document_description_search: options[:description],
+                                  campaign_urn_list: options[:campaign],
+                                  class_urn_list: options[:class],
+                                  personal_documents: options[:personal])
+        Ohmage::CliHelpers.format_output(ls, options[:table], [:urn, :name, :description, :privacy_state], :name)
+      end
     end
 
     class Create < Thor
@@ -57,6 +72,39 @@ module Ohmage
         Ohmage::CliHelpers.format_output(new_class, options[:table], [:urn, :name, :description], :urn)
       end
       map class: :clazz
+
+      desc 'create document <file> <options>', 'creates a new document with parameters'
+      option :description, aliases: :d, type: :string, desc: 'description of document'
+      option :name, aliases: :n, type: :string, desc: 'name of document (defaults to filename if not passed)'
+      option :share, type: :boolean, default: false, desc: 'is document private or shared?'
+      option :class_role, type: :string, desc: 'class_role param: like urn:class:public;reader'
+      option :campaign_role, type: :string, desc: 'campaign_role param: like urn:campaign:snack;reader'
+      def document(file)
+        case options[:share]
+        when false
+          privacy_state = 'private'
+        else
+          privacy_state = 'shared'
+        end
+        if options[:campaign_role].nil? && options[:class_role].nil?
+          puts 'must supply one of [--class_role, --campaign_role]'
+        elsif options[:name].nil?
+          new_document = Ohmage.document_create(file,
+                                                document_class_role_list: options[:class_role],
+                                                document_campaign_role_list: options[:campaign_role],
+                                                privacy_state: privacy_state,
+                                                description: options[:description])
+        else
+          new_document = Ohmage.document_create(file,
+                                                document_class_role_list: options[:class_role],
+                                                document_campaign_role_list: options[:campaign_role],
+                                                privacy_state: privacy_state,
+                                                description: options[:description],
+                                                document_name: options[:name])
+        end          
+          Ohmage::CliHelpers.format_output(new_document, options[:table], [:urn, :name, :description, :privacy_state], :name)
+      end
+
     end
 
     class Delete < Thor
@@ -74,6 +122,11 @@ module Ohmage
       desc 'delete campaign <campaign_urn>', 'deletes an existing ohmage campaign'
       def campaign(urn)
         Ohmage.campaign_delete(campaign_urn: urn)
+      end
+
+      desc 'delete document <document_id>', 'deletes an existing ohmage document'
+      def document(id)
+        Ohmage.document_delete(document_id: id)
       end
     end
 

@@ -68,6 +68,7 @@ A list of the APIs which are currently implemented, and their internal method na
 | auth_token, auth   | user/auth_token      |
 | document_read      | document/read        |
 | document_create    | document/create      |
+| document_delete    | document/delete      |
 
 
 CLI Documentation

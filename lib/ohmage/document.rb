@@ -23,6 +23,11 @@ module Ohmage
         request.perform
         document_read(document_name_search: params[:document_name])
       end
+
+      def document_delete(params = {})
+        request = Ohmage::Request.new(self, :post, 'document/delete', params)
+        request.perform
+      end
     end
   end
 end
