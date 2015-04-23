@@ -32,6 +32,16 @@ module Ohmage
         request.perform
         class_read(class_urn_list: params[:class_urn])
       end
+
+      def class_search(params = {})
+        request = Ohmage::Request.new(self, :post, 'class/search', params)
+        # TODO: make a utility to abstract creation of array of base objects
+        t = []
+        request.perform[:data].each do |k, v|
+          t << Ohmage::Clazz.new(k => v)
+        end
+        t
+      end
     end
   end
 end

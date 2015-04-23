@@ -5,6 +5,8 @@ module Ohmage
     attr_reader :my_role, :role
     # @return [Hash]
     attr_reader :users
+    # @return [Array]
+    attr_reader :usernames #class/search returns only array of usernames
 
     def initialize(attrs = {})
       @urn = attrs.keys[0].to_s
