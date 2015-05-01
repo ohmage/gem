@@ -70,6 +70,10 @@ A list of the APIs which are currently implemented, and their internal method na
 | document_read      | document/read        |
 | document_create    | document/create      |
 | document_delete    | document/delete      |
+| image_read         | image/read           |
+| media_read*        | media/read*          |
+
+* API currently only available in 2.17-beta.
 
 
 CLI Documentation
