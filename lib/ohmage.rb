@@ -8,6 +8,7 @@ require 'ohmage/entity/user'
 require 'ohmage/entity/clazz'
 require 'ohmage/entity/campaign'
 require 'ohmage/entity/document'
+require 'ohmage/entity/survey'
 require 'ohmage/version'
 
 module Ohmage

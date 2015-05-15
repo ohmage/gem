@@ -3,6 +3,7 @@ require 'ohmage/campaign'
 require 'ohmage/clazz'
 require 'ohmage/document'
 require 'ohmage/media'
+require 'ohmage/survey'
 
 module Ohmage
   module API
@@ -11,5 +12,6 @@ module Ohmage
     include Ohmage::API::Campaign
     include Ohmage::API::Document
     include Ohmage::API::Media
+    include Ohmage::API::Survey
   end
 end

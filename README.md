@@ -41,6 +41,13 @@ From there you can just start making calls! Take a look at the (ohmage 2.x API s
 oh.user_create(username: 'newuser', password: 'newpassword', admin: false, enabled: true, new_account: true)
 ```
 
+The hyperloaded `survey_response/read` api is really just that. This gem does the best job it can to stay out of the way but provides some sane defaults to get survey responses to play with from the least amount of effort.  In particular, the parameters `column_list`, `output_format` and `user_list` all have defaults to provide the most useful (and most complete response) from the server. Please feel free to pass these parameters though if you know you want something different. An extremely simple example to get an array of all responses your current user has access to in the campaign `urn:campaign:sample`:
+
+```ruby
+responses = oh.survey_response_read(campaign_urn: 'urn:campaign:sample')
+p responses # outputs the entire array of Ohmage::SurveyResponse objects
+```
+
 A few APIs can/must use files on the disk for uploading (`document/create`, `survey/upload` if sending multimedia). Passing the filename as the expected parameter will result in the expected behavior:
 
 ```ruby
@@ -52,33 +59,36 @@ About object types! Calls that are able to return entities will return new insta
 
 A list of the APIs which are currently implemented, and their internal method name:
 
-| method             | maps to              |
-|--------------------|----------------------|
-| user_create        | user/create          |
-| user_update        | user/update          |
-| user_password      | user/change_password |
-| user_read          | user/read            |
-| user_info_read     | user_info/read       |
-| user_delete        | user/delete          |
-| class_read         | class/read           |
-| class_create       | class/create         |
-| class_update       | class/update         |
-| class_delete       | class/delete         |
-| class_search       | class/search         |
-| campaign_read      | campaign/read        |
-| campaign_create    | campaign/create      |
-| campaign_update    | campaign/update      |
-| campaign_delete    | campaign/delete      |
-| server_config_read | config/read          |
-| auth_token, auth   | user/auth_token      |
-| document_read      | document/read        |
-| document_create    | document/create      |
-| document_update    | document/update      |
-| document_delete    | document/delete      |
-| media_read         | media/read, etc*     |
-| image_read*        | image/read           |
-| audio_read*        | media/read           |
-| video_read*        | media/read           |
+| method                 | maps to                |
+|------------------------|------------------------|
+| user_create            | user/create            |
+| user_update            | user/update            |
+| user_password          | user/change_password   |
+| user_read              | user/read              |
+| user_info_read         | user_info/read         |
+| user_delete            | user/delete            |
+| class_read             | class/read             |
+| class_create           | class/create           |
+| class_update           | class/update           |
+| class_delete           | class/delete           |
+| class_search           | class/search           |
+| campaign_read          | campaign/read          |
+| campaign_create        | campaign/create        |
+| campaign_update        | campaign/update        |
+| campaign_delete        | campaign/delete        |
+| survey_response_read   | survey_response/read   |
+| survey_response_update | survey_response/update |
+| survey_response_delete | survey_response/delete |
+| server_config_read     | config/read            |
+| auth_token, auth       | user/auth_token        |
+| document_read          | document/read          |
+| document_create        | document/create        |
+| document_update        | document/update        |
+| document_delete        | document/delete        |
+| media_read             | media/read, etc*       |
+| image_read*            | image/read             |
+| audio_read*            | media/read             |
+| video_read*            | media/read             |
 
 * While media/read becomes support in server 2.17, this wrapper has mapped all methods to work regardless of the server version. Prefer the
 `media_read` method for all media calls, regardless of type.
