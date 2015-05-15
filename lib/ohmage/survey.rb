@@ -6,7 +6,7 @@ module Ohmage
       # @see https://github.com/ohmage/server/wiki/Survey-Manipulation#surveyResponseRead
       # @returns [Array Ohmage::Survey objects] pertaining to request params.
       #
-      def survey_response_read(params = {})
+      def survey_response_read(params = {}) # rubocop:disable all
         params[:column_list] = params[:column_list] || 'urn:ohmage:special:all'
         params[:output_format] = params[:output_format] || 'json-rows'
         params[:user_list] = params[:user_list] || 'urn:ohmage:special:all'
