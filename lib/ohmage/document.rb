@@ -15,13 +15,28 @@ module Ohmage
         t
       end
 
-      def document_create(file, params = {})
-        params[:document] = HTTP::FormData::File.new(file)
+      #
+      # ohmage document/create call
+      # @see https://github.com/ohmage/server/wiki/Document-Manipulation#documentCreate
+      # @returns [Ohmage::Document object]
+      #
+      def document_create(params = {})
+        params[:document] = HTTP::FormData::File.new(params[:document])
         # catch lack of document_name param, since we can just append the filename we have!
-        params[:document_name] = File.basename(file) unless params.key?(:document_name)
         request = Ohmage::Request.new(self, :post, 'document/create', params)
         request.perform
         document_read(document_name_search: params[:document_name])
+      end
+
+      #
+      # ohmage document/update call
+      # @see https://github.com/ohmage/server/wiki/Document-Manipulation#documentUpdate
+      # @returns nil, can't be sure we can search for the updated file.
+      #
+      def document_update(params = {})
+        params[:document] = HTTP::FormData::File.new(params[:document]) if params[:document]
+        request = Ohmage::Request.new(self, :post, 'document/update', params)
+        request.perform
       end
 
       def document_delete(params = {})

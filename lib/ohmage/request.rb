@@ -16,7 +16,7 @@ module Ohmage
       @request_method = request_method
       # some create/upload apis require content to be sent as multipart form. catch that here
       case api
-      when 'document/create', 'survey/upload'
+      when 'document/create', 'survey/upload', 'document/update', 'campaign/create', 'campaign/update'
         @params = {form: @options}
       else
         @params = {params: @options}

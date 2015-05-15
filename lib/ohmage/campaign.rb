@@ -15,6 +15,31 @@ module Ohmage
         t
       end
 
+      #
+      # ohmage campaign/create call
+      # @see https://github.com/ohmage/server/wiki/Campaign-Manipulation#campaignCreate
+      # @returns [Ohmage::Campaign object] or nil if urn is not passed as param
+      #
+      def campaign_create(params = {})
+        params[:xml] = HTTP::FormData::File.new(params[:xml])
+        request = Ohmage::Request.new(self, :post, 'campaign/create', params)
+        request.perform
+        # we cannot create a campaign object if campaign_urn is not passed as a param. returns nil otherwise
+        campaign_read(campaign_urn_list: params[:campaign_urn], output_format: 'long') if params[:campaign_urn]
+      end
+
+      #
+      # ohmage campaign/update call
+      # @see https://github.com/ohmage/server/wiki/Campaign-Manipulation#campaignUpdate
+      # @returns [Ohmage::Campaign object]
+      #
+      def campaign_update(params = {})
+        params[:xml] = HTTP::FormData::File.new(params[:xml]) if params[:xml]
+        request = Ohmage::Request.new(self, :post, 'campaign/update', params)
+        request.perform
+        campaign_read(campaign_urn_list: params[:campaign_urn])
+      end
+
       def campaign_delete(params = {})
         request = Ohmage::Request.new(self, :post, 'campaign/delete', params)
         request.perform
