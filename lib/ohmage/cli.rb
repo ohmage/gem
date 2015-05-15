@@ -89,13 +89,13 @@ module Ohmage
         if options[:campaign_role].nil? && options[:class_role].nil?
           puts 'must supply one of [--class_role, --campaign_role]'
         elsif options[:name].nil?
-          new_document = Ohmage.document_create(file,
+          new_document = Ohmage.document_create(document: file,
                                                 document_class_role_list: options[:class_role],
                                                 document_campaign_role_list: options[:campaign_role],
                                                 privacy_state: privacy_state,
                                                 description: options[:description])
         else
-          new_document = Ohmage.document_create(file,
+          new_document = Ohmage.document_create(document: file,
                                                 document_class_role_list: options[:class_role],
                                                 document_campaign_role_list: options[:campaign_role],
                                                 privacy_state: privacy_state,
