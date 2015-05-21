@@ -114,6 +114,7 @@ ohmage ls class # returns list of class urns the current user can view
 ohmage ls class -t # returns a table of classes and info the current user can view
 ohmage create user testuser --password "testpassword" # creates a new user with defaults (enabled, new_account set, not admin)
 ohmage update user testuser --no-admin --new # sets admin to false and new_account to true for testuser
+ohmage update password testuser --password "testpassword" # updates user's password. this is a different API in ohmage from user/update
 ```
 
 ## Copyright
