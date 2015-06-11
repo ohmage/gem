@@ -55,6 +55,29 @@ oh.document_create(document: '/path/to/file/sample.docx', privacy_state: 'shared
 ```
 will create a document on the server with the `sample.docx` file as the content.
 
+The `survey_upload` method requires a distinct parameter setup (make sure to take a look at the [server api](https://github.com/ohmage/server/wiki/Survey-Manipulation#surveyUpload) for details). Here's a simple example of how this method would work with an image. Note that it shells out to the `file` command to return a useful mime-type (required by ohmage).
+
+```ruby
+oh.survey_upload(campaign_creation_timestamp: '2015-05-13 08:53:00',
+                 campaign_urn: 'urn:campaign:mobilize:steve:phototest',
+                 surveys: [{survey_key: 'b08c05b2-67d0-4962-8c82-913edd534504',
+                           location_status: 'unavailable',
+                           time: 1434046871000,
+                           timezone: 'America/Los_Angeles',
+                           survey_id: 'test',
+                           survey_launch_context: {
+                             launch_time: 1434046871000,
+                             launch_timezone: 'America/Los_Angeles',
+                             active_triggers: []
+                           },
+                           responses: [
+                             {prompt_id: 'photo',
+                              value: 'a3d25bdd-8d4b-4db6-96f6-d26dcc9aeac3'}
+                           ]}].to_json,
+                 'a3d25bdd-8d4b-4db6-96f6-d26dcc9aeac3':'/path/to/image.png'
+                 )
+```
+
 About object types! Calls that are able to return entities will return new instances of top-level objects: `Ohmage::User`, `Ohmage::Campaign`, `Ohmage::Clazz` (note the zz) and `Ohmage::Document`. Calls involving deletes (`user_delete`, `campaign_delete`) and `user_password` return `nil` if successful.
 
 A list of the APIs which are currently implemented, and their internal method name:
@@ -79,6 +102,7 @@ A list of the APIs which are currently implemented, and their internal method na
 | survey_response_read   | survey_response/read   |
 | survey_response_update | survey_response/update |
 | survey_response_delete | survey_response/delete |
+| survey_upload          | survey/upload          |
 | server_config_read     | config/read            |
 | auth_token, auth       | user/auth_token        |
 | document_read          | document/read          |

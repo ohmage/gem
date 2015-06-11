@@ -43,6 +43,24 @@ module Ohmage
         request = Ohmage::Request.new(self, :post, 'survey_response/delete', params)
         request.perform
       end
+
+      #
+      # ohmage survey/upload call
+      # @see https://github.com/ohmage/server/wiki/Survey-Manipulation#surveyUpload
+      # @returns success/fail as string.
+      #
+      def survey_upload(params = {})
+        # loop around params, finding attached images/files, set them as form data.
+        params.each do |param|
+          if /[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}/.match(param.first)
+            @mime_type = /[^;]*/.match(`file -b --mime "#{param[1]}"`)[0]
+            params[param[0]] = HTTP::FormData::File.new(param[1], mime_type: @mime_type)
+          end
+          next
+        end
+        request = Ohmage::Request.new(self, :post, 'survey/upload', params)
+        request.perform
+      end
     end
   end
 end
