@@ -5,6 +5,7 @@ module Ohmage
       # ohmage media/read call
       # @see https://github.com/ohmage/server/wiki/Media-Manipulation#mediaRead
       # @returns [Binary File] from raw HTTP Response Body.
+      #
       def media_read(params = {})
         # support for media/read exists only in 2.17+
         if server_config[:application_version].to_f >= 2.17

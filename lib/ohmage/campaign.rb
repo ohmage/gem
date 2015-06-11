@@ -40,9 +40,29 @@ module Ohmage
         campaign_read(campaign_urn_list: params[:campaign_urn])
       end
 
+      #
+      # ohmage campaign/delete call
+      # @see https://github.com/ohmage/server/wiki/Campaign-Manipulation#campaignDelete
+      # @returns string of success/fail
+      #
       def campaign_delete(params = {})
         request = Ohmage::Request.new(self, :post, 'campaign/delete', params)
         request.perform
+      end
+
+      #
+      # ohmage campaign/search call
+      # @see https://github.com/ohmage/server/wiki/Campaign-Manipulation#campaignSearch
+      # @returns [Array: Ohmage::Campaign objects]
+      #
+      def campaign_search(params = {})
+        request = Ohmage::Request.new(self, :post, 'campaign/search', params)
+        # TODO: make a utility to abstract creation of array of base objects
+        t = []
+        request.perform[:data].each do |k, v|
+          t << Ohmage::Campaign.new(k => v)
+        end
+        t
       end
     end
   end

@@ -99,6 +99,7 @@ A list of the APIs which are currently implemented, and their internal method na
 | campaign_create        | campaign/create        |
 | campaign_update        | campaign/update        |
 | campaign_delete        | campaign/delete        |
+| campaign_search        | campaign/search        |
 | survey_response_read   | survey_response/read   |
 | survey_response_update | survey_response/update |
 | survey_response_delete | survey_response/delete |
@@ -109,6 +110,7 @@ A list of the APIs which are currently implemented, and their internal method na
 | document_create        | document/create        |
 | document_update        | document/update        |
 | document_delete        | document/delete        |
+| document_contents      | document/read/contents |
 | media_read             | media/read, etc*       |
 | image_read*            | image/read             |
 | audio_read*            | media/read             |

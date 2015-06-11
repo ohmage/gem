@@ -14,7 +14,7 @@ module Ohmage
 
     # @return [Integer]
     def patch
-      13
+      14
     end
 
     # @return [Integer, NilClass]

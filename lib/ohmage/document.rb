@@ -39,8 +39,23 @@ module Ohmage
         request.perform
       end
 
+      #
+      # ohmage document/delete call
+      # @see https://github.com/ohmage/server/wiki/Document-Manipulation#documentDelete
+      # @returns string with success/fail
+      #
       def document_delete(params = {})
         request = Ohmage::Request.new(self, :post, 'document/delete', params)
+        request.perform
+      end
+
+      #
+      # ohmage document/read/contents call
+      # @see https://github.com/ohmage/server/wiki/Document-Manipulation#documentUpdate
+      # @returns [Binary File] from raw HTTP Response Body.
+      #
+      def document_contents(params = {})
+        request = Ohmage::Request.new(self, :post, 'document/read/contents', params)
         request.perform
       end
     end
