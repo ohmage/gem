@@ -4,7 +4,7 @@ module Ohmage
       @client = client
       @uri = Addressable::URI.parse(@client.server_url + @client.path + api)
       @options = options
-      @options['client'] = @client.client_string
+      @options[:client] = @client.client_string
       case api
       when 'config/read', 'user/auth_token', 'user/auth'
         # these calls don't need auth
