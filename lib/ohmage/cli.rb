@@ -155,7 +155,7 @@ module Ohmage
     desc 'hi', 'returns current config'
     def hi
       conf = Ohmage.client
-      puts 'Server: ' + conf.host
+      puts 'Server: ' + conf.server_url
       puts 'Current User: ' + conf.user
       conf.server_config.each do |k, v|
         puts k.to_s + ': ' + v.to_s
