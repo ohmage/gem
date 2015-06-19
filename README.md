@@ -141,6 +141,7 @@ ohmage ls class -t # returns a table of classes and info the current user can vi
 ohmage create user testuser --password "testpassword" # creates a new user with defaults (enabled, new_account set, not admin)
 ohmage update user testuser --no-admin --new # sets admin to false and new_account to true for testuser
 ohmage update password testuser --password "testpassword" # updates user's password. this is a different API in ohmage from user/update
+ohmage update class urn:class:test --restricted restricted.user1,restricted.user2 --privileged priv.user1 --remove remove.user1
 ```
 
 ## Copyright

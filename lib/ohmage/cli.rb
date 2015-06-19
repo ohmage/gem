@@ -150,6 +150,27 @@ module Ohmage
       def password(username)
         Ohmage.user_password(username: username, new_password: options[:password])
       end
+
+      desc 'update class <class urn> <options>', 'updates values for a given class'
+      option :description, aliases: :d, type: :string, desc: 'description of class'
+      option :name, aliases: :n, type: :string, desc: 'name of class'
+      option :privileged, type: :string, desc: 'privileged users to add'
+      option :restricted, type: :string, desc: 'restricted users to add'
+      option :remove, type: :string, desc: 'users to remove'
+      def clazz(urn) # rubocop:disable all
+        params = {}
+        params[:class_urn] = urn
+        params[:class_name] = options[:name] if options[:name]
+        params[:description] = options[:description] if options[:description]
+        user_list = ''
+        user_list << options[:privileged].gsub(',', ';privileged,') + ';privileged,' if options[:privileged]
+        user_list << options[:restricted].gsub(',', ';restricted,') + ';restricted' if options[:restricted]
+        params[:user_role_list_add] = user_list
+        params[:user_list_remove] = options[:remove] if options[:remove]
+        update_class = Ohmage.class_update(params)
+        Ohmage::CliHelpers.format_output(update_class, options[:table], [:urn, :name, :description, :role, :users], :urn)
+      end
+      map class: :clazz
     end
 
     desc 'hi', 'returns current config'
