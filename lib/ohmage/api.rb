@@ -4,6 +4,7 @@ require 'ohmage/clazz'
 require 'ohmage/document'
 require 'ohmage/media'
 require 'ohmage/survey'
+require 'ohmage/audit'
 
 module Ohmage
   module API
@@ -13,5 +14,6 @@ module Ohmage
     include Ohmage::API::Document
     include Ohmage::API::Media
     include Ohmage::API::Survey
+    include Ohmage::API::Audit
   end
 end

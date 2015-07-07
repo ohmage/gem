@@ -115,6 +115,7 @@ A list of the APIs which are currently implemented, and their internal method na
 | image_read*            | image/read             |
 | audio_read*            | media/read             |
 | video_read*            | media/read             |
+| audit_read             | audit/read (admin only)|
 
 * While media/read becomes support in server 2.17, this wrapper has mapped all methods to work regardless of the server version. Prefer the
 `media_read` method for all media calls, regardless of type.
