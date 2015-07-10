@@ -21,7 +21,7 @@ module Ohmage
       # @returns [Ohmage::Campaign object] or nil if urn is not passed as param
       #
       def campaign_create(params = {})
-        params[:xml] = HTTP::FormData::File.new(params[:xml])
+        params[:xml] = HTTP::FormData::File.new(params[:xml]) unless params[:xml].include? '<?xml'
         request = Ohmage::Request.new(self, :post, 'campaign/create', params)
         request.perform
         # we cannot create a campaign object if campaign_urn is not passed as a param. returns nil otherwise
