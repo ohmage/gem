@@ -4,7 +4,7 @@ require 'ohmage/version'
 
 Gem::Specification.new do |spec|
   spec.add_dependency 'addressable'
-  spec.add_dependency 'http', '~> 0.7.3'
+  spec.add_dependency 'http', '~> 0.8.0'
   spec.add_dependency 'thor', '~> 0.19.1'
   spec.add_dependency 'formatador', '~> 0.2.5'
   spec.authors = ['Steve Nolen']
