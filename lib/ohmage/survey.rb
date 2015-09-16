@@ -14,7 +14,7 @@ module Ohmage
         request = Ohmage::Request.new(self, :post, 'survey_response/read', params)
         t = []
         # We can't possibly make Ohmage::SurveyReponse objects unless we use json-rows. json-columns and csv output is so odd for this.
-        if params[:output_format] == 'json-rows'
+        if params[:output_format] == 'json-rows' && params[:collapse] != true
           request.perform[:data].each do |v|
             t << Ohmage::SurveyResponse.new(v[:survey_key] => v)
           end
