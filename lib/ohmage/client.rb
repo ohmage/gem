@@ -19,14 +19,17 @@ module Ohmage
       server_config_read
       self
     end
+
     #
     # ohmage config/read call
     # @returns [Hash] of server config details
+    #
     def server_config_read
       request = Ohmage::Request.new(self, :get, 'config/read', {})
       resp = request.perform
       self.server_config = resp[:data]
     end
+
     #
     # ohmage user/auth_token call
     # @see https://github.com/ohmage/server/wiki/User-Authentication#statefulAuthentication
