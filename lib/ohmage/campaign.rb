@@ -37,7 +37,7 @@ module Ohmage
         params[:xml] = HTTP::FormData::File.new(params[:xml]) if params[:xml]
         request = Ohmage::Request.new(self, :post, 'campaign/update', params)
         request.perform
-        campaign_read(campaign_urn_list: params[:campaign_urn])
+        campaign_read(campaign_urn_list: params[:campaign_urn], output_format: "short") if params[:campaign_urn]
       end
 
       #
