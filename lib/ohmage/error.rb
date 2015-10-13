@@ -43,28 +43,28 @@ module Ohmage
       '0202' => Ohmage::Error::Unauthorized,
       '0203' => Ohmage::Error::InvalidToken,
     }
-    ('0300'..'0312').to_a.each do |e|
+    ('0300'..'0399').to_a.each do |e|
       STRING_ERRORS[e] = Ohmage::Error::InvalidParameter
     end
-    ('0500'..'0503').to_a.each do |e|
+    ('0500'..'0599').to_a.each do |e|
       STRING_ERRORS[e] = Ohmage::Error::MobilityException
     end
-    ('0600'..'0630').to_a.each do |e|
+    ('0600'..'0699').to_a.each do |e|
       STRING_ERRORS[e] = Ohmage::Error::SurveyException
     end
-    ('0700'..'0713').to_a.each do |e|
+    ('0700'..'0799').to_a.each do |e|
       STRING_ERRORS[e] = Ohmage::Error::CampaignException
     end
-    ('0800'..'0803').to_a.each do |e|
+    ('0800'..'0899').to_a.each do |e|
       STRING_ERRORS[e] = Ohmage::Error::ImageException
     end
-    ('0900'..'0906').to_a.each do |e|
+    ('0900'..'0999').to_a.each do |e|
       STRING_ERRORS[e] = Ohmage::Error::ClassException
     end
-    ('1000'..'1017').to_a.each do |e|
+    ('1000'..'1099').to_a.each do |e|
       STRING_ERRORS[e] = Ohmage::Error::UserException
     end
-    ('1100'..'1803').to_a.each do |e|
+    ('1100'..'1899').to_a.each do |e|
       STRING_ERRORS[e] = Ohmage::Error::CatchAll
     end
     class << self
