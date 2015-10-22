@@ -68,6 +68,16 @@ module Ohmage
       STRING_ERRORS[e] = Ohmage::Error::CatchAll
     end
     class << self
+    # Initializes a new Error object
+    #
+    # @param message [Exception, String]
+    # @param rate_limit [Hash]
+    # @param code [Integer]
+    # @return [Ohmage::Error]
+    def initialize(message = '', code = nil)
+      super(message)
+      @code = code
+    end
       # Create a new error from an HTTP response
       #
       # @param body [String]
@@ -96,16 +106,6 @@ module Ohmage
         first = Array(body[:errors]).first
         [first[:text], first[:code]]
       end
-    end
-    # Initializes a new Error object
-    #
-    # @param message [Exception, String]
-    # @param rate_limit [Hash]
-    # @param code [Integer]
-    # @return [Ohmage::Error]
-    def initialize(message = '', code = nil)
-      super(message)
-      @code = code
     end
   end
 end
