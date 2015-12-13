@@ -25,7 +25,7 @@ module Ohmage
     def perform # rubocop:disable all
       response = HTTP.public_send(@request_method, @uri.to_s, @params)
       # ohmage responds to image/read, audio/read, video/read (and media/read) with a file only.
-      unless (response.headers['Content-Type'] == 'application/json')
+      unless response.headers['Content-Type'] == 'application/json'
         return response.body
       end
       response_body = symbolize_keys!(response.parse)
