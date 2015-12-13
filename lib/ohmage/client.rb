@@ -45,5 +45,15 @@ module Ohmage
       resp[:token]
     end
     alias_method :auth, :auth_token
+
+    # Masking password from inspected client.
+    # Lovingly lifted from https://github.com/octokit/octokit.rb,
+    # The full text of the license for this work (MIT) can be found at
+    # http://opensource.org/licenses/mit
+    # @return [String]
+    def inspect
+      inspected = super
+      inspected.gsub! @password, '*******' if @password
+    end
   end
 end
