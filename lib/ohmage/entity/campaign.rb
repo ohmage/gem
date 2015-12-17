@@ -14,6 +14,12 @@ module Ohmage
       attrs.values[0].each do |k, v|
         instance_variable_set("@#{k}", v)
       end
+      begin
+        require 'oga'
+        @xml = Oga.parse_xml(@xml)
+      rescue LoadError
+        # no op, gem is not required.
+      end
     end
   end
 end
