@@ -17,8 +17,9 @@ module Ohmage
       begin
         require 'oga'
         @xml = Oga.parse_xml(@xml)
-      rescue LoadError
+      rescue LoadError # rubocop:disable Lint/HandleExceptions
         # no op, gem is not required.
+        # and yes, rubocop, I did this on purpose!
       end
     end
   end
