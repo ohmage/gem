@@ -4,7 +4,7 @@ require 'ohmage/request'
 module Ohmage
   class Client
     include Ohmage::API
-    attr_accessor :port, :path, :client_string, :user, :password, :token, :server_config, :server_url
+    attr_accessor :port, :path, :client_string, :user, :password, :token, :server_config, :server_url, :server_debug
     def initialize(options = {}) # rubocop:disable MethodLength
       self.server_url = ENV['OHMAGE_SERVER_URL']
       self.user = ENV['OHMAGE_USER']
@@ -12,6 +12,7 @@ module Ohmage
       self.client_string = 'ruby-ohmage'
       self.path = 'app/'
       self.port = 443
+      self.server_debug = false
       options.each do |k, v|
         instance_variable_set("@#{k}", v)
       end

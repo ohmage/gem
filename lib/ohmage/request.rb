@@ -68,6 +68,7 @@ module Ohmage
       # so we're going to catch the real ones first, assuming
       # they are sent from the web server (like 502 or 404)
       klass = Ohmage::Error::ERRORS[code]
+      puts "\e[36m#{body.inspect}\e[0" if @client.server_debug
       if klass.nil?
         # we're not necessarily sure that this really isn't an error
         # so we have to inspect the response body to look for result:failure
