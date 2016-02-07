@@ -28,7 +28,7 @@ module Ohmage
         major: major,
         minor: minor,
         patch: patch,
-        pre: pre,
+        pre: pre
       }
     end
 

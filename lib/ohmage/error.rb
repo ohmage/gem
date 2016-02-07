@@ -31,7 +31,7 @@ module Ohmage
       500 => Ohmage::Error::InternalServerError,
       502 => Ohmage::Error::BadGateway,
       503 => Ohmage::Error::ServiceUnavailable,
-      504 => Ohmage::Error::GatewayTimeout,
+      504 => Ohmage::Error::GatewayTimeout
     }
     # How ugly is this??
     STRING_ERRORS = {
@@ -41,7 +41,7 @@ module Ohmage
       '0200' => Ohmage::Error::Unauthorized,
       '0201' => Ohmage::Error::Unauthorized,
       '0202' => Ohmage::Error::Unauthorized,
-      '0203' => Ohmage::Error::InvalidToken,
+      '0203' => Ohmage::Error::InvalidToken
     }
     ('0300'..'0399').to_a.each do |e|
       STRING_ERRORS[e] = Ohmage::Error::InvalidParameter
