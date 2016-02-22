@@ -14,6 +14,13 @@ module Ohmage
       attrs.values[0].each do |k, v|
         instance_variable_set("@#{k}", v)
       end
+      begin
+        require 'oga'
+        @xml = Oga.parse_xml(@xml)
+      rescue LoadError # rubocop:disable Lint/HandleExceptions
+        # no op, gem is not required.
+        # and yes, rubocop, I did this on purpose!
+      end
     end
   end
 end

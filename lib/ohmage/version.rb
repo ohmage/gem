@@ -14,7 +14,7 @@ module Ohmage
 
     # @return [Integer]
     def patch
-      24
+      28
     end
 
     # @return [Integer, NilClass]
@@ -28,7 +28,7 @@ module Ohmage
         major: major,
         minor: minor,
         patch: patch,
-        pre: pre,
+        pre: pre
       }
     end
 

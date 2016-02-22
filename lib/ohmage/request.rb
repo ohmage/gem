@@ -25,7 +25,7 @@ module Ohmage
     def perform # rubocop:disable all
       response = HTTP.public_send(@request_method, @uri.to_s, @params)
       # ohmage responds to image/read, audio/read, video/read (and media/read) with a file only.
-      unless (response.headers['Content-Type'] == 'application/json')
+      unless response.headers['Content-Type'] == 'application/json'
         return response.body
       end
       response_body = symbolize_keys!(response.parse)
@@ -68,6 +68,7 @@ module Ohmage
       # so we're going to catch the real ones first, assuming
       # they are sent from the web server (like 502 or 404)
       klass = Ohmage::Error::ERRORS[code]
+      puts "\e[36m#{body.inspect}\e[0" if @client.server_debug
       if klass.nil?
         # we're not necessarily sure that this really isn't an error
         # so we have to inspect the response body to look for result:failure

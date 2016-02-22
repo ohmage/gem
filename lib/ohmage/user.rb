@@ -59,6 +59,18 @@ module Ohmage
         request = Ohmage::Request.new(self, :post, 'user/delete', params)
         request.perform
       end
+
+      #
+      # ohmage user/setup call
+      # @see https://github.com/ohmage/server/wiki/User-Manipulation#userSetup
+      # @returns
+      #
+      def user_setup(params = {})
+        # server bug returns empty page if user setup disabled.
+        return false unless server_config[:user_setup_enabled]
+        request = Ohmage::Request.new(self, :post, 'user/setup', params)
+        request.perform
+      end
     end
   end
 end
