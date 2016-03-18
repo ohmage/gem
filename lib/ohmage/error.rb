@@ -32,7 +32,7 @@ module Ohmage
       502 => Ohmage::Error::BadGateway,
       503 => Ohmage::Error::ServiceUnavailable,
       504 => Ohmage::Error::GatewayTimeout
-    }
+    }.freeze
     # How ugly is this??
     STRING_ERRORS = {
       '0100' => Ohmage::Error::InternalServerError,
@@ -42,7 +42,7 @@ module Ohmage
       '0201' => Ohmage::Error::Unauthorized,
       '0202' => Ohmage::Error::Unauthorized,
       '0203' => Ohmage::Error::InvalidToken
-    }
+    }.freeze
     ('0300'..'0399').to_a.each do |e|
       STRING_ERRORS[e] = Ohmage::Error::InvalidParameter
     end
@@ -78,34 +78,37 @@ module Ohmage
       super(message)
       @code = code
     end
-      # Create a new error from an HTTP response
-      #
-      # @param body [String]
-      # @return [Ohmage::Error]
-      def from_response(body)
-        message, code = parse_error(body)
-        # ohmage returns own error codes in body and as strings.
-        if code.is_a? String
-          new(message, 888)
-        else
-          new(message, code)
-        end
+
+    # Create a new error from an HTTP response
+    #
+    # @param body [String]
+    # @return [Ohmage::Error]
+    def from_response(body)
+      message, code = parse_error(body)
+      # ohmage returns own error codes in body and as strings.
+      if code.is_a? String
+        # some bug in catchall already sets this?
+        # error class really needs a refactor.
+        new(message)
+      else
+        new(message, code)
       end
+    end
 
     private
 
-      def parse_error(body)
-        if body.nil? || body.empty?
-          ['', nil]
-        elsif body[:errors]
-          extract_message_from_errors(body)
-        end
+    def parse_error(body)
+      if body.nil? || body.empty?
+        ['', nil]
+      elsif body[:errors]
+        extract_message_from_errors(body)
       end
+    end
 
-      def extract_message_from_errors(body)
-        first = Array(body[:errors]).first
-        [first[:text], first[:code]]
-      end
+    def extract_message_from_errors(body)
+      first = Array(body[:errors]).first
+      [first[:text], first[:code]]
+    end
     end
   end
 end

@@ -80,12 +80,12 @@ module Ohmage
       option :class_role, type: :string, desc: 'class_role param: like urn:class:public;reader'
       option :campaign_role, type: :string, desc: 'campaign_role param: like urn:campaign:snack;reader'
       def document(file) # rubocop:disable all
-        case options[:share]
-        when false
-          privacy_state = 'private'
-        else
-          privacy_state = 'shared'
-        end
+        privacy_state = case options[:share]
+                        when false
+                          'private'
+                        else
+                          'shared'
+                        end
         if options[:campaign_role].nil? && options[:class_role].nil?
           puts 'must supply one of [--class_role, --campaign_role]'
         elsif options[:name].nil?

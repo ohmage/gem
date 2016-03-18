@@ -1,7 +1,7 @@
 module Ohmage
   class SurveyResponse
     # @return [String]
-    attr_reader :client, :privacy_state, :repeatable_set_id, :repeatable_set_iteration, :survey_description, :survey_id, :survey_title, :user, :timezone
+    attr_reader :urn, :client, :privacy_state, :repeatable_set_id, :repeatable_set_iteration, :survey_description, :survey_id, :survey_title, :user, :timezone
     # @return [String] location stuffz
     attr_reader :location_accuracy, :location_provider, :location_status, :location_timestamp
     # @return [Long]

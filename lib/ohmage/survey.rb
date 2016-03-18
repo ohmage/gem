@@ -52,7 +52,7 @@ module Ohmage
       def survey_upload(params = {})
         # loop around params, finding attached images/files, set them as form data.
         params.each do |param|
-          if /[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}/.match(param.first)
+          if /[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}/ =~ param.first
             @mime_type = /[^;]*/.match(`file -b --mime "#{param[1]}"`)[0]
             params[param[0]] = HTTP::FormData::File.new(param[1], mime_type: @mime_type)
           end

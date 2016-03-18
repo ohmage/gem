@@ -75,7 +75,7 @@ module Ohmage
       #
       # ohmage user/search call. Admin only api
       # @see https://github.com/ohmage/server/wiki/User-Manipulation#userSetup
-      # @returns Array of Ohmage::User objects. 
+      # @returns Array of Ohmage::User objects.
       #
       def user_search(params = {})
         request = Ohmage::Request.new(self, :post, 'user/search', params)
