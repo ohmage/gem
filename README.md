@@ -91,6 +91,7 @@ A list of the APIs which are currently implemented, and their internal method na
 | user_info_read         | user_info/read         |
 | user_delete            | user/delete            |
 | user_setup             | user/setup             |
+| user_search            | user/search            |
 | class_read             | class/read             |
 | class_create           | class/create           |
 | class_update           | class/update           |
