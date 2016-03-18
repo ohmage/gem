@@ -5,6 +5,7 @@ require 'ohmage/document'
 require 'ohmage/media'
 require 'ohmage/survey'
 require 'ohmage/audit'
+require 'ohmage/annotation'
 
 module Ohmage
   module API
@@ -15,5 +16,6 @@ module Ohmage
     include Ohmage::API::Media
     include Ohmage::API::Survey
     include Ohmage::API::Audit
+    include Ohmage::API::Annotation
   end
 end

@@ -42,7 +42,7 @@ module Ohmage
       '0201' => Ohmage::Error::Unauthorized,
       '0202' => Ohmage::Error::Unauthorized,
       '0203' => Ohmage::Error::InvalidToken
-    }.freeze
+    }
     ('0300'..'0399').to_a.each do |e|
       STRING_ERRORS[e] = Ohmage::Error::InvalidParameter
     end

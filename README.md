@@ -82,42 +82,46 @@ About object types! Calls that are able to return entities will return new insta
 
 A list of the APIs which are currently implemented, and their internal method name:
 
-| method                 | maps to                |
-|------------------------|------------------------|
-| user_create            | user/create            |
-| user_update            | user/update            |
-| user_password          | user/change_password   |
-| user_read              | user/read              |
-| user_info_read         | user_info/read         |
-| user_delete            | user/delete            |
-| user_setup             | user/setup             |
-| user_search            | user/search            |
-| class_read             | class/read             |
-| class_create           | class/create           |
-| class_update           | class/update           |
-| class_delete           | class/delete           |
-| class_search           | class/search           |
-| campaign_read          | campaign/read          |
-| campaign_create        | campaign/create        |
-| campaign_update        | campaign/update        |
-| campaign_delete        | campaign/delete        |
-| campaign_search        | campaign/search        |
-| survey_response_read   | survey_response/read   |
-| survey_response_update | survey_response/update |
-| survey_response_delete | survey_response/delete |
-| survey_upload          | survey/upload          |
-| server_config_read     | config/read            |
-| auth_token, auth       | user/auth_token        |
-| document_read          | document/read          |
-| document_create        | document/create        |
-| document_update        | document/update        |
-| document_delete        | document/delete        |
-| document_contents      | document/read/contents |
-| media_read             | media/read, etc*       |
-| image_read*            | image/read             |
-| audio_read*            | media/read             |
-| video_read*            | media/read             |
-| audit_read             | audit/read (admin only)|
+| method                            | maps to                          |
+|-----------------------------------|----------------------------------|
+| user_create                       | user/create                      |
+| user_update                       | user/update                      |
+| user_password                     | user/change_password             |
+| user_read                         | user/read                        |
+| user_info_read                    | user_info/read                   |
+| user_delete                       | user/delete                      |
+| user_setup                        | user/setup                       |
+| user_search                       | user/search                      |
+| class_read                        | class/read                       |
+| class_create                      | class/create                     |
+| class_update                      | class/update                     |
+| class_delete                      | class/delete                     |
+| class_search                      | class/search                     |
+| campaign_read                     | campaign/read                    |
+| campaign_create                   | campaign/create                  |
+| campaign_update                   | campaign/update                  |
+| campaign_delete                   | campaign/delete                  |
+| campaign_search                   | campaign/search                  |
+| survey_response_read              | survey_response/read             |
+| survey_response_update            | survey_response/update           |
+| survey_response_delete            | survey_response/delete           |
+| survey_upload                     | survey/upload                    |
+| server_config_read                | config/read                      |
+| auth_token, auth                  | user/auth_token                  |
+| document_read                     | document/read                    |
+| document_create                   | document/create                  |
+| document_update                   | document/update                  |
+| document_delete                   | document/delete                  |
+| document_contents                 | document/read/contents           |
+| media_read                        | media/read, etc*                 |
+| image_read*                       | image/read                       |
+| audio_read*                       | media/read                       |
+| video_read*                       | media/read                       |
+| audit_read                        | audit/read (admin only)          |
+| annotation_survey_response_create | annotation/survey_response/create|
+| annotation_survey_response_read   | annotation/survey_response/read  |
+| annotation_prompt_response_create | annotation/prompt_response/create|
+| annotation_prompt_response_read   | annotation/prompt_response/read  |
 
 * While media/read becomes support in server 2.17, this wrapper has mapped all methods to work regardless of the server version. Prefer the
 `media_read` method for all media calls, regardless of type.

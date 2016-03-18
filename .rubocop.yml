@@ -37,3 +37,6 @@ Style/Alias:
 
 Style/SignalException:
   Enabled: false
+
+Style/MutableConstant:
+  Enabled: false
