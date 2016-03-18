@@ -63,13 +63,28 @@ module Ohmage
       #
       # ohmage user/setup call
       # @see https://github.com/ohmage/server/wiki/User-Manipulation#userSetup
-      # @returns
+      # @returns Hash with username and password param.
       #
       def user_setup(params = {})
         # server bug returns empty page if user setup disabled.
         return false unless server_config[:user_setup_enabled]
         request = Ohmage::Request.new(self, :post, 'user/setup', params)
         request.perform
+      end
+
+      #
+      # ohmage user/search call. Admin only api
+      # @see https://github.com/ohmage/server/wiki/User-Manipulation#userSetup
+      # @returns Array of Ohmage::User objects. 
+      #
+      def user_search(params = {})
+        request = Ohmage::Request.new(self, :post, 'user/search', params)
+        # TODO: make a utility to abstract creation of array of base objects
+        t = []
+        request.perform[:data].each do |k, v|
+          t << Ohmage::User.new(k => v)
+        end
+        t
       end
     end
   end
