@@ -7,7 +7,7 @@ module Ohmage
     attr_reader :user_roles, :classes
     alias_method :roles, :user_roles
     # @return [Hash]
-    attr_reader :user_role_campaign
+    attr_reader :user_role_campaign, :survey_response_count
 
     def initialize(attrs = {})
       @urn = attrs.keys[0].to_s
